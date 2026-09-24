@@ -27,6 +27,7 @@
   "final_amount",
   "payment_status",
   "actual_checkout_date",
+  "remarks",
   "status"
  ],
  "fields": [
@@ -152,6 +153,7 @@
    "label": "Actual Checkout Date"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -162,13 +164,18 @@
    "fieldname": "expected_checkout_date",
    "fieldtype": "Date",
    "label": "Expected Checkout Date"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-23 16:33:41.825042",
+ "modified": "2026-09-24 18:09:25.472623",
  "modified_by": "Administrator",
  "module": "pawpass",
  "name": "Stay Card",

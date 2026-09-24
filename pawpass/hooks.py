@@ -132,9 +132,9 @@ app_license = "mit"
 # -----------
 # Permissions evaluated in scripted ways
 
-permission_query_conditions = {
-	"Attendant": "pawpass.permissions.create_permission",
-}
+# permission_query_conditions = {
+# 	"Attendant": "pawpass.permissions.create_permission",
+# }
 #
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
@@ -213,6 +213,7 @@ permission_query_conditions = {
 # ----------------
 # before_request = ["pawpass.utils.before_request"]
 # after_request = ["pawpass.utils.after_request"]
+after_install=["pawpass.api.after_install"]
 
 # Job Events
 # ----------

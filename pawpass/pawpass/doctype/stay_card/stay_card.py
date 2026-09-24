@@ -2,7 +2,6 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import today, getdate, add_days, flt
 
-
 class StayCard(Document):
     def validate(self):
         vaccination_expiry = frappe.db.get_value("Pet", self.pet, "vaccination_expiry")
@@ -28,7 +27,7 @@ class StayCard(Document):
             self.services_total += row.line_total
         self.final_amount = self.services_total
     def before_submit(self):
-        if self.status != "Ready for Pickup":
+        if self.status not in ["Ready for Pickup", "Picked Up"]:
             frappe.throw("Stay Card must be Ready for Pickup.")
         if not self.service_lines:
             frappe.throw("At least one service line is required.")
