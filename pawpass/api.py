@@ -8,18 +8,18 @@ def get_upcoming_checkouts():
         frappe.qb.from_(SC).select(SC.name,SC.pet,SC.owner_name,SC.expected_checkout_date).where(SC.status.isin(["Checked In", "In Service"]) and SC.expected_checkout_date <= add_days(today(), 2)).orderby(SC.expected_checkout_date).run(as_dict=True)
     )
 @frappe.whitelist()
-def transfer_stays(from_attendant,to_attendant):
+def transfer_stays(from_attendant, to_attendant):
     try:
-        data=frappe.db.sql("""UPDATE `tabStay Card` SET assigned_attendant=%s WHERE assigned_attendant=%s """,(from_attendant,to_attendant))
-        frappe.db.commit()
-    except Exception:
-        frappe.rollback()
-        frappe.log_error(
-            frappe.traceback()
-        )
-    raise
+        frappe.db.sql("""
+            UPDATE `tabStay Card` SET assigned_attendant = %s WHERE assigned_attendant = %s
+        """, (to_attendant, from_attendant))
 
-@frappe.whitelist
+        frappe.db.commit()
+        return "Stays transferred successfully"
+    except Exception :
+        print("hi")
+
+@frappe.whitelist()
 def after_install():
      settings = frappe.get_doc('Pawpass Settings')
      frappe.db.set_value('Pawpass Settings', settings.name, 'shop_name','Naturals')
@@ -43,7 +43,17 @@ def after_install():
              'resource_name': 'Default Resource3',
              'capacity': 30
          }).insert()
-
-def check_upcoming_checkouts():
-
-    
+@frappe.whitelist()
+def get_stay_summary(stay_card_name):
+    stay_card = frappe.get_doc("Stay Card", stay_card_name)
+    if not stay_card:
+        frappe.local.response["http_status_code"] = 404
+        return {"error": "Not found"}
+    return {
+        "name": stay_card.name,
+        "pet": stay_card.pet,
+        "owner_name": stay_card.owner_name,
+        "checkin_date": stay_card.checkin_date,
+        "expected_checkout_date": stay_card.expected_checkout_date,
+    }
+# http://127.0.0.1:8000/api/method/pawpass.api.get_stay_summary?PC-2026-00021

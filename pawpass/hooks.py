@@ -76,18 +76,17 @@ app_license = "mit"
 # Jinja
 # ----------
 
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "pawpass.utils.jinja_methods",
-# 	"filters": "pawpass.utils.jinja_filters"
-# }
+
+jinja = {
+	"methods": "pawpass.utils.get_shop_name",
+	# "filters": "pawpass.utils.jinja_filters"
+}
 
 # Installation
 # ------------
 
 # before_install = "pawpass.install.before_install"
 # after_install = "pawpass.install.after_install"
-
 # Uninstallation
 # ------------
 
@@ -144,13 +143,14 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Stay Card": {
+		"on_update": "pawpass.audit.log_change",
+        "on_submit": "pawpass.audit.log_change",
+        "on_cancel": "pawpass.audit.log_change",
+        "before_print":"pawpass.pawpass.doctype.stay_card.stay_card.before_print"
+	}
+}
 
 # Scheduled Tasks
 # ---------------

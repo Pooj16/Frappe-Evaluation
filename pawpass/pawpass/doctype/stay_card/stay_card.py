@@ -83,3 +83,5 @@ def send_stay_email(stay_card_name):
             subject="Your Pet Stay is Completed",
             message="<p>Hi from Pet Shop</p>"
         )
+def before_print(doc,method=None,print_settings=None):
+    doc.print_summary = f"{doc.owner_name} - {doc.pet}"

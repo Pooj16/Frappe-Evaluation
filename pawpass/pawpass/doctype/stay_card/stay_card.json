@@ -102,6 +102,7 @@
   {
    "fieldname": "assigned_attendant",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Assigned Attendant",
    "options": "Attendant"
   },
@@ -175,7 +176,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-24 18:09:25.472623",
+ "modified": "2026-09-25 15:45:36.329627",
  "modified_by": "Administrator",
  "module": "pawpass",
  "name": "Stay Card",

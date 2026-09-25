@@ -27,7 +27,7 @@ frappe.ui.form.on("Stay Card", {
             frm.doc.status,
             colors[frm.doc.status]
         );
-        if(frm.doc.status==='Ready for Pickup' && frm.doc.docstatus===0){
+        if(frm.doc.status==='Ready for Pickup' && frm.doc.docstatus===1){
             frm.add_custom_button('Know status',function(){
                 frappe.msgprint('Marked as '+frm.doc.status);
             });
